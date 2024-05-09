@@ -1,4 +1,4 @@
-const FinishScreen = function ({ points, maxPoints }) {
+const FinishScreen = function ({ points, maxPoints, highscore }) {
   const percentage = (points / maxPoints) * 100;
   let emoji;
   if (percentage === 100) emoji = "🏅";
@@ -8,10 +8,13 @@ const FinishScreen = function ({ points, maxPoints }) {
   if (percentage === 0) emoji = "🤦‍♂️";
 
   return (
-    <p className="result">
-      <span>{emoji}</span> You scored <strong>{points}</strong> out of{" "}
-      {maxPoints} ({percentage.toFixed(2)}% )
-    </p>
+    <>
+      <p className="result">
+        <span>{emoji}</span> You scored <strong>{points}</strong> out of{" "}
+        {maxPoints} ({percentage.toFixed(2)}% )
+      </p>
+      <p className="highscore">(Highscore: {highscore} points)</p>
+    </>
   );
 };
 
