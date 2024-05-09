@@ -45,6 +45,9 @@ const reducer = function (state, action) {
     case "nextQuestion":
       return { ...state, qnIndex: state.qnIndex + 1, answer: null };
 
+    case "finish":
+      return { ...state, status: "finished" };
+
     default:
       throw new Error("Action unknown");
   }

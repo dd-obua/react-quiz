@@ -9,7 +9,15 @@ const NextButton = function ({ dispatch, answer, qnIndex, numQns }) {
         Next
       </button>
     );
-  else return <button className="btn btn-ui">Finish</button>;
+  else
+    return (
+      <button
+        className="btn btn-ui"
+        onClick={() => dispatch({ type: "finish" })}
+      >
+        Finish
+      </button>
+    );
 };
 
 export default NextButton;
