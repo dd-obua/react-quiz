@@ -11,6 +11,7 @@ const intialState = {
   questions: [],
   // 'loading', 'error', 'ready', 'active', 'finished'
   status: "loading",
+  qnIndex: 0,
 };
 
 const reducer = function (state, action) {
@@ -31,7 +32,7 @@ const reducer = function (state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
-  const { questions, status } = state;
+  const { questions, status, qnIndex } = state;
   const numQns = questions.length;
 
   useEffect(function () {
@@ -51,7 +52,7 @@ function App() {
           <StartScreen numQns={numQns} dispatch={dispatch} />
         )}
 
-        {status === "active" && <Question />}
+        {status === "active" && <Question qn={questions[qnIndex]} />}
       </Main>
     </div>
   );
