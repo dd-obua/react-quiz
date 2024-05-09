@@ -5,6 +5,7 @@ import Main from "./Main";
 import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
+import Question from "./Question";
 
 const intialState = {
   questions: [],
@@ -19,6 +20,9 @@ const reducer = function (state, action) {
 
     case "dataFailed":
       return { ...state, status: "error" };
+
+    case "start":
+      return { ...state, status: "active" };
 
     default:
       throw new Error("Action unknown");
@@ -43,7 +47,11 @@ function App() {
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && <StartScreen numQns={numQns} />}
+        {status === "ready" && (
+          <StartScreen numQns={numQns} dispatch={dispatch} />
+        )}
+
+        {status === "active" && <Question />}
       </Main>
     </div>
   );
