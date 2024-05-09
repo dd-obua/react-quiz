@@ -12,6 +12,7 @@ const intialState = {
   // 'loading', 'error', 'ready', 'active', 'finished'
   status: "loading",
   qnIndex: 0,
+  answer: null,
 };
 
 const reducer = function (state, action) {
@@ -25,6 +26,9 @@ const reducer = function (state, action) {
     case "start":
       return { ...state, status: "active" };
 
+    case "newAnswer":
+      return { ...state, answer: action.payload };
+
     default:
       throw new Error("Action unknown");
   }
@@ -32,7 +36,7 @@ const reducer = function (state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, intialState);
-  const { questions, status, qnIndex } = state;
+  const { questions, status, qnIndex, answer } = state;
   const numQns = questions.length;
 
   useEffect(function () {
@@ -52,7 +56,13 @@ function App() {
           <StartScreen numQns={numQns} dispatch={dispatch} />
         )}
 
-        {status === "active" && <Question qn={questions[qnIndex]} />}
+        {status === "active" && (
+          <Question
+            qn={questions[qnIndex]}
+            dispatch={dispatch}
+            answer={answer}
+          />
+        )}
       </Main>
     </div>
   );
