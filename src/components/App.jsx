@@ -79,6 +79,7 @@ function App() {
               numQns={numQns}
               points={points}
               maxPoints={maxPoints}
+              answer={answer}
             />
 
             <Question
