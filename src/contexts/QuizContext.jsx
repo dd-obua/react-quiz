@@ -101,6 +101,7 @@ const QuizProvider = function ({ children }) {
         secondsRemaining,
         numQns,
         maxPoints,
+        dispatch,
       }}
     >
       {children}

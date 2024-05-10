@@ -1,3 +1,5 @@
+import { useQuiz } from "../contexts/QuizContext";
+
 import Header from "./Header";
 import Main from "./Main";
 import Loader from "./Loader";
@@ -11,54 +13,27 @@ import Footer from "./Footer";
 import Timer from "./Timer";
 
 function App() {
+  const { status } = useQuiz();
   return (
     <div className="app">
       <Header />
       <Main>
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
-        {status === "ready" && (
-          <StartScreen numQns={numQns} dispatch={dispatch} />
-        )}
+        {status === "ready" && <StartScreen />}
 
         {status === "active" && (
           <>
-            <Progress
-              qnIndex={qnIndex}
-              numQns={numQns}
-              points={points}
-              maxPoints={maxPoints}
-              answer={answer}
-            />
-
-            <Question
-              qn={questions[qnIndex]}
-              dispatch={dispatch}
-              answer={answer}
-            />
-
+            <Progress />
+            <Question />
             <Footer>
-              <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
-
-              <NextButton
-                dispatch={dispatch}
-                answer={answer}
-                points={points}
-                qnIndex={qnIndex}
-                numQns={numQns}
-              />
+              <Timer />
+              <NextButton />
             </Footer>
           </>
         )}
 
-        {status === "finished" && (
-          <FinishScreen
-            points={points}
-            maxPoints={maxPoints}
-            highscore={highscore}
-            dispatch={dispatch}
-          />
-        )}
+        {status === "finished" && <FinishScreen />}
       </Main>
     </div>
   );
