@@ -82,6 +82,7 @@ const QuizProvider = function ({ children }) {
 
   const numQns = questions.length;
   const maxPoints = questions.reduce((acc, cur) => acc + cur.points, 0);
+  const question = state.questions.at(state.qnIndex);
 
   useEffect(function () {
     fetch(`http://localhost:8000/questions`)
@@ -102,6 +103,7 @@ const QuizProvider = function ({ children }) {
         numQns,
         maxPoints,
         dispatch,
+        question,
       }}
     >
       {children}
