@@ -12,6 +12,8 @@ import FinishScreen from "./FinishScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
 
+const SECS_PER_QN = 30;
+
 const initialState = {
   questions: [],
   // 'loading', 'error', 'ready', 'active', 'finished'
@@ -20,7 +22,7 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
-  secondsRemaining: 10,
+  secondsRemaining: null,
 };
 
 const reducer = function (state, action) {
@@ -32,7 +34,11 @@ const reducer = function (state, action) {
       return { ...state, status: "error" };
 
     case "start":
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        secondsRemaining: state.questions.length * SECS_PER_QN,
+      };
 
     case "newAnswer":
       const question = state.questions.at(state.qnIndex);
